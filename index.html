@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AICTE Partner Portal - Chitragupta AI Validation</title>
+  
+  <!-- Google Fonts: Inter and Noto Sans Devanagari -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- Local Stylesheets -->
+  <link rel="stylesheet" href="css/portal.css">
+  <link rel="stylesheet" href="css/chitragupta.css">
+</head>
+<body>
+
+  <!-- ================= TOP NAVIGATION BAR (AICTE CLONE) ================= -->
+  <header class="aicte-topbar">
+    <div class="topbar-left">
+      <!-- AICTE Emblem Placeholder -->
+      <a href="#/home" class="aicte-emblem-wrap" title="AICTE Home">
+        <svg class="aicte-emblem-svg" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="46" fill="#f8fafc" stroke="#c9a227" stroke-width="4"/>
+          <!-- Dharmachakra / Cogwheel Emblem -->
+          <circle cx="50" cy="50" r="34" fill="none" stroke="#0b2a4a" stroke-width="3"/>
+          <circle cx="50" cy="50" r="14" fill="#c9a227" stroke="#0b2a4a" stroke-width="2"/>
+          <!-- 12 Spokes -->
+          <g stroke="#0b2a4a" stroke-width="2">
+            <line x1="50" y1="16" x2="50" y2="84" />
+            <line x1="16" y1="50" x2="84" y2="50" />
+            <line x1="26" y1="26" x2="74" y2="74" />
+            <line x1="26" y1="74" x2="74" y2="26" />
+          </g>
+        </svg>
+      </a>
+
+      <!-- AICTE Bilingual Header Text -->
+      <div class="aicte-title-wrap">
+        <span class="aicte-title-en">All India Council for Technical Education</span>
+        <span class="aicte-title-hi">अखिल भारतीय तकनीकी शिक्षा परिषद</span>
+      </div>
+    </div>
+
+    <!-- Center Navigation Links -->
+    <nav class="topbar-nav">
+      <a href="#/home" class="topbar-nav-link active" id="nav-portal-home">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </a>
+      <a href="#/portal/reset-password" class="topbar-nav-link" id="nav-portal-reset">
+        <i class="fas fa-key"></i>
+        <span>Reset Password</span>
+      </a>
+      <a href="#/portal/about-view" class="topbar-nav-link" id="nav-portal-view">
+        <i class="fas fa-eye"></i>
+        <span>About View</span>
+      </a>
+      <a href="#/portal/about-record" class="topbar-nav-link" id="nav-portal-record">
+        <i class="fas fa-file-alt"></i>
+        <span>About Record</span>
+      </a>
+      <a href="#/portal/downloads" class="topbar-nav-link" id="nav-portal-downloads">
+        <i class="fas fa-download"></i>
+        <span>Downloads</span>
+      </a>
+      <a href="#/portal/reports" class="topbar-nav-link" id="nav-portal-reports">
+        <i class="fas fa-chart-bar"></i>
+        <span>Report(s)</span>
+      </a>
+      <!-- Our Extra Item: Chitragupta with Saffron Highlight & NEW Badge -->
+      <a href="#/chitragupta/review" class="topbar-nav-link chitragupta-highlight" id="nav-portal-chitragupta" title="AI-Powered Validation & Regulatory Verification Module">
+        <i class="fas fa-scroll"></i>
+        <span>Chitragupta</span>
+        <span class="new-badge">NEW</span>
+      </a>
+    </nav>
+
+    <!-- Right Controls: Role Switcher Dropdown -->
+    <div class="topbar-right">
+      <div class="portal-role-container">
+        <div class="portal-avatar-btn" id="portal-avatar-btn" title="Click to switch role">
+          <div class="portal-avatar-circle">
+            <i class="fas fa-user-tie"></i>
+          </div>
+          <div style="display: flex; flex-direction: column; text-align: left; line-height: 1.1;">
+            <span id="avatar-role-label" style="font-weight: 700;">Scrutiny officer</span>
+            <span style="font-size: 9px; opacity: 0.85;">Switch Role <i class="fas fa-chevron-down" style="font-size: 8px;"></i></span>
+          </div>
+        </div>
+
+        <!-- Role Dropdown Menu (Section 4.7) -->
+        <div class="role-dropdown-menu" id="role-dropdown-menu">
+          <div class="role-dropdown-header">
+            <div class="role-dropdown-title">Active Persona</div>
+            <div class="role-current-name" id="current-role-name">Scrutiny officer</div>
+          </div>
+          <div id="role-dropdown-items">
+            <!-- Dynamically populated by app.js -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= ADVISORY BANNER ================= -->
+  <div class="aicte-advisory-banner" id="aicte-advisory-banner">
+    <i class="fas fa-shield-alt"></i>
+    <span>AI output is decision support only. Scrutiny, inspection and final decisions rest with competent AICTE authorities.</span>
+  </div>
+
+  <!-- ================= VIEW 1: PORTAL HOME (CLONE) ================= -->
+  <main class="portal-home-container" id="portal-home-view">
+    <div class="portal-welcome-strip">
+      <div>
+        <h2 class="welcome-institute-name">Sri Vidya Institute of Technology</h2>
+        <div class="welcome-institute-sub">
+          Permanent Institute ID: <strong>1-43289012</strong> • Current Academic Year: <strong>2026-2027</strong> • Region: <strong>South-Western (Karnataka)</strong>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span class="portal-session-pill"><i class="fas fa-lock"></i> SSL Secured Session</span>
+      </div>
+    </div>
+
+    <!-- 11 Circular Icon Tiles Grid -->
+    <div class="portal-tiles-scroll-wrapper">
+      <div class="portal-tiles-grid" id="portal-tiles-grid">
+        <!-- Rendered by js/portal.js -->
+      </div>
+    </div>
+
+    <!-- Tile Scroll Chevrons -->
+    <div class="tile-scroll-controls">
+      <button class="tile-chevron-btn" id="tile-chevron-up" title="Scroll Up">
+        <i class="fas fa-chevron-up"></i>
+      </button>
+      <button class="tile-chevron-btn" id="tile-chevron-down" title="Scroll Down">
+        <i class="fas fa-chevron-down"></i>
+      </button>
+    </div>
+  </main>
+
+  <!-- ================= VIEW 2: PORTAL CLONE SUBPAGE ================= -->
+  <div class="portal-subpage-container" id="portal-subpage-view" style="display: none;">
+    <!-- Rendered by js/portal.js based on hash -->
+  </div>
+
+  <!-- ================= VIEW 3: CHITRAGUPTA MAIN MODULE ================= -->
+  <div class="chitragupta-container" id="chitragupta-app-view" style="display: none;">
+    <!-- Collapsible Left Sidebar -->
+    <aside class="cg-sidebar" id="cg-sidebar">
+      <div class="cg-sidebar-header">
+        <div class="cg-brand-logo">
+          <i class="fas fa-eye"></i>
+        </div>
+        <div class="cg-brand-info">
+          <span class="cg-brand-title">CHITRAGUPTA</span>
+          <span class="cg-brand-tag">AICTE-Verify • SIH 2026</span>
+        </div>
+      </div>
+
+      <!-- Sidebar Navigation (8 Sections) -->
+      <ul class="cg-nav-list">
+        <li class="cg-nav-item active" data-section="review">
+          <a href="#/chitragupta/review">
+            <i class="fas fa-cloud-upload-alt cg-nav-icon"></i>
+            <span>Upload & AI Review</span>
+            <span class="cg-nav-badge" style="background: #f28c1e; color: #fff;">Star</span>
+          </a>
+        </li>
+        <li class="cg-nav-item" data-section="dashboard">
+          <a href="#/chitragupta/dashboard">
+            <i class="fas fa-tachometer-alt cg-nav-icon"></i>
+            <span>Dashboard</span>
+            <span class="cg-nav-badge">12</span>
+          </a>
+        </li>
+        <li class="cg-nav-item" data-section="verification">
+          <a href="#/chitragupta/verification">
+            <i class="fas fa-check-double cg-nav-icon"></i>
+            <span>Verification Board</span>
+          </a>
+        </li>
+        <li class="cg-nav-item" data-section="compliance">
+          <a href="#/chitragupta/compliance">
+            <i class="fas fa-calculator cg-nav-icon"></i>
+            <span>Compliance Assistant</span>
+          </a>
+        </li>
+        <li class="cg-nav-item" data-section="audit">
+          <a href="#/chitragupta/audit">
+            <i class="fas fa-link cg-nav-icon"></i>
+            <span>Audit Trail (SHA-256)</span>
+          </a>
+        </li>
+        <li class="cg-nav-item" data-section="design">
+          <a href="#/chitragupta/design">
+            <i class="fas fa-project-diagram cg-nav-icon"></i>
+            <span>System Design</span>
+          </a>
+        </li>
+        <li class="cg-nav-item" data-section="about">
+          <a href="#/chitragupta/about">
+            <i class="fas fa-info-circle cg-nav-icon"></i>
+            <span>About</span>
+          </a>
+        </li>
+        <li class="cg-nav-item" id="nav-item-admin" data-section="admin" style="display: none;">
+          <a href="#/chitragupta/admin">
+            <i class="fas fa-cogs cg-nav-icon"></i>
+            <span>Admin / SLM Control</span>
+            <span class="cg-nav-badge" style="background: #ef4444; color: #fff;">SysAdmin</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Sidebar Footer (SLM Status & Theme Toggle) -->
+      <div class="cg-sidebar-footer">
+        <div class="slm-status-pill">
+          <div>
+            <span class="status-dot online" id="sidebar-slm-dot"></span>
+            <span>Local SLM (3B GGUF)</span>
+          </div>
+          <span class="rules-only-chip" id="sidebar-rules-chip" style="display: none;">Rules-Only</span>
+        </div>
+        <button class="dark-mode-toggle-btn" id="cg-theme-toggle">
+          <i class="fas fa-moon"></i> Dark Mode
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Viewport -->
+    <main class="cg-main-viewport">
+
+      <!-- ================= SECTION 1: UPLOAD & AI REVIEW ================= -->
+      <section class="cg-view-section active" id="cg-section-review">
+        <div class="cg-page-header">
+          <div class="cg-page-title-wrap">
+            <h1><i class="fas fa-file-invoice" style="color: var(--cg-saffron);"></i> Document Ingestion & Validation Pipeline</h1>
+            <p class="cg-page-subtitle">Smart India Hackathon 2026 • AI-Powered Regulatory Verification • APH 2024-27 Annexure-2</p>
+          </div>
+          <div class="cg-header-actions">
+            <button class="btn-cg-secondary" onclick="window.ChitraguptaController.downloadReportJson()">
+              <i class="fas fa-download"></i> Download Report (JSON)
+            </button>
+            <button class="btn-cg-secondary" onclick="window.ChitraguptaController.printReportPdf()">
+              <i class="fas fa-print"></i> Print / Save as PDF
+            </button>
+          </div>
+        </div>
+
+        <!-- Upload Card & Dropzone -->
+        <div class="upload-card-wrapper">
+          <div class="upload-drop-zone" id="cg-drop-zone">
+            <div class="upload-icon-circle">
+              <i class="fas fa-folder-open"></i>
+            </div>
+            <h3 class="upload-title">Upload College Documents Folder</h3>
+            <p class="upload-subtitle">Drag and drop institutional documents folder, or select files (PDF, JPG, PNG, DOCX accepted; completely client-side)</p>
+            
+            <div class="upload-actions-bar">
+              <input type="file" id="cg-folder-input" webkitdirectory multiple style="display: none;">
+              <input type="file" id="cg-file-input" multiple accept=".pdf,.jpg,.jpeg,.png,.docx,.xlsx" style="display: none;">
+
+              <button class="btn-cg-secondary" onclick="document.getElementById('cg-folder-input').click()">
+                <i class="fas fa-folder"></i> Choose Folder
+              </button>
+              <button class="btn-cg-secondary" onclick="document.getElementById('cg-file-input').click()">
+                <i class="fas fa-file-upload"></i> Choose Files
+              </button>
+              <button class="btn-cg-primary" id="btn-load-sample" style="background: linear-gradient(135deg, #0b2a4a, #1e3a8a);">
+                <i class="fas fa-sparkles"></i> Load Sample College Folder (Synthetic)
+              </button>
+            </div>
+          </div>
+
+          <!-- Institutional Form Strip -->
+          <div class="institution-form-strip">
+            <div class="form-field-group">
+              <label>Institution Name</label>
+              <input type="text" id="form-inst-name" value="Sri Vidya Institute of Technology">
+            </div>
+            <div class="form-field-group">
+              <label>AICTE Application ID</label>
+              <input type="text" id="form-inst-id" value="1-9310827361">
+            </div>
+            <div class="form-field-group">
+              <label>Academic Year</label>
+              <input type="text" id="form-academic-year" value="2026-2027">
+            </div>
+            <div class="form-field-group">
+              <label>Application Category</label>
+              <select id="form-category">
+                <option value="EoA based on Self-Disclosure">EoA based on Self-Disclosure (Annexure-2)</option>
+                <option value="New Technical Institution">New Technical Institution</option>
+                <option value="Increase in Intake / Additional Course">Increase in Intake / Additional Course</option>
+                <option value="Change of Site / Location">Change of Site / Location</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Staged Files Tree & Detected Document Type Chips -->
+          <div class="loaded-files-panel">
+            <div class="loaded-files-header">
+              <span class="loaded-files-count" id="loaded-files-count-badge">14 documents staged</span>
+              <button class="btn-cg-primary" id="btn-run-review" style="font-size: 14px; padding: 10px 24px;">
+                <i class="fas fa-play"></i> Run AI Review
+              </button>
+            </div>
+            <div class="files-tree-grid" id="loaded-files-grid">
+              <!-- Rendered by js/chitragupta.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= RESULTS CONTAINER (APPEARS AFTER RUN REVIEW) ================= -->
+        <div id="results-container" class="hidden">
+          <!-- Header Summary Card -->
+          <div class="results-header-summary-card">
+            <div class="summary-top-row">
+              <div>
+                <h2 class="summary-title-h2">Application Review: 1-9310827361</h2>
+                <div class="summary-meta-sub">
+                  <span><strong>Institution:</strong> Sri Vidya Institute of Technology, Karnataka</span>
+                  <span><strong>Category:</strong> EoA based on Self-Disclosure</span>
+                  <span><strong>Checklist:</strong> APH 2024-27 (Annexure-2)</span>
+                  <span><strong>Rule Pack:</strong> v3.2.0-PROD</span>
+                </div>
+              </div>
+              <div style="text-align: right;">
+                <div class="overall-status-chip">
+                  <i class="fas fa-exclamation-triangle"></i>
+                  <span>Deficiencies found — Officer review required</span>
+                </div>
+                <div style="font-size: 11px; color: var(--cg-text-muted); margin-top: 5px;">
+                  Completed in <strong>2 min 14 s</strong> (manual baseline ~45 min)
+                </div>
+              </div>
+            </div>
+
+            <!-- Readiness & Metrics Strip -->
+            <div class="summary-metrics-grid">
+              <div class="readiness-gauge-box">
+                <div class="gauge-circle">
+                  <div class="gauge-inner-val">68%</div>
+                </div>
+                <div>
+                  <div style="font-size: 13px; font-weight: 800;">Readiness Score</div>
+                  <div style="font-size: 10.5px; color: var(--cg-text-muted);">Self-Disclosure</div>
+                </div>
+              </div>
+              <div class="kpi-tile-small">
+                <div class="kpi-tile-val" style="color: #b91c1c;">2 Missing</div>
+                <div class="kpi-tile-label">Statutory Certs</div>
+              </div>
+              <div class="kpi-tile-small">
+                <div class="kpi-tile-val" style="color: #b45309;">1 Expired</div>
+                <div class="kpi-tile-label">Fire NOC (80d)</div>
+              </div>
+              <div class="kpi-tile-small">
+                <div class="kpi-tile-val" style="color: #c2410c;">1 Incomplete</div>
+                <div class="kpi-tile-label">Affidavit e-Stamp</div>
+              </div>
+              <div class="kpi-tile-small">
+                <div class="kpi-tile-val" style="color: #15803d;">7 Verified</div>
+                <div class="kpi-tile-label">Authority Clean</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 7 Results Tabs Navigation Bar -->
+          <div class="results-tabs-nav">
+            <button class="results-tab-btn active" data-tab="tab-checklist">
+              <i class="fas fa-tasks"></i> 1. Checklist & Completeness <span class="tab-badge alert">3 Deficient</span>
+            </button>
+            <button class="results-tab-btn" data-tab="tab-extracted">
+              <i class="fas fa-table"></i> 2. Extracted Data & Consistency <span class="tab-badge alert">5 Mismatches</span>
+            </button>
+            <button class="results-tab-btn" data-tab="tab-anomaly">
+              <i class="fas fa-search-plus"></i> 3. Anomaly & Forgery Indicators <span class="tab-badge alert">4 Flags</span>
+            </button>
+            <button class="results-tab-btn" data-tab="tab-verification">
+              <i class="fas fa-check-double"></i> 4. Verification Board <span class="tab-badge">6 States</span>
+            </button>
+            <button class="results-tab-btn" data-tab="tab-compliance">
+              <i class="fas fa-balance-scale"></i> 5. Compliance Assistant <span class="tab-badge alert">Norms</span>
+            </button>
+            <button class="results-tab-btn" data-tab="tab-evidence">
+              <i class="fas fa-project-diagram"></i> 6. Explanation & Evidence Graph
+            </button>
+            <button class="results-tab-btn" data-tab="tab-actions">
+              <i class="fas fa-user-shield"></i> 7. Officer Actions (Human Gate)
+            </button>
+          </div>
+
+          <!-- TAB 1: CHECKLIST & COMPLETENESS -->
+          <div class="tab-content-panel active" id="tab-checklist">
+            <div class="subpage-card">
+              <table class="portal-table">
+                <thead>
+                  <tr>
+                    <th>Statutory Document Name</th>
+                    <th>Requirement Type</th>
+                    <th>Validation Status</th>
+                    <th>Validity Period / Expiry</th>
+                    <th>Handbook Clause</th>
+                    <th>Attached Evidence</th>
+                  </tr>
+                </thead>
+                <tbody id="checklist-tbody">
+                  <!-- Populated by js/chitragupta.js -->
+                </tbody>
+              </table>
+
+              <!-- Rectification Panel for Institution Role -->
+              <div class="rectification-callout-panel" id="rectification-panel" style="display: none;">
+                <div>
+                  <h4 style="font-size: 13.5px; font-weight: 700; color: #1e3a8a;"><i class="fas fa-tools"></i> Rectification Window Active (One-Time Reopening)</h4>
+                  <p style="font-size: 11.5px; color: #475569; margin-top: 3px;">
+                    Under APH Chapter I, Clause 1.8 (p. 14), editing is permanently locked following submission. A one-time reopening window has been unlocked by Scrutiny to replace deficient documents.
+                  </p>
+                </div>
+                <button class="btn-cg-primary" onclick="alert('Demo: Uploading rectified Fire Safety NOC and ₹100 Affidavit');">
+                  <i class="fas fa-upload"></i> Re-Upload Deficient Docs
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 2: EXTRACTED DATA & CONSISTENCY -->
+          <div class="tab-content-panel" id="tab-extracted">
+            <div class="subpage-card" style="margin-bottom: 20px;">
+              <h3 style="font-size: 15px; font-weight: 700; margin-bottom: 12px; color: #1e3a8a;">
+                <i class="fas fa-file-contract"></i> Multi-Document Extracted Statutory Fields (with Confidence Calibration)
+              </h3>
+              <table class="portal-table">
+                <thead>
+                  <tr>
+                    <th>Extracted Field</th>
+                    <th>Extracted Value</th>
+                    <th>Parser Confidence</th>
+                    <th>Source Document & Page</th>
+                    <th>Cross-Reference Validation</th>
+                  </tr>
+                </thead>
+                <tbody id="extracted-fields-tbody">
+                  <!-- Populated by js/chitragupta.js -->
+                </tbody>
+              </table>
+            </div>
+
+            <div class="subpage-card">
+              <h3 style="font-size: 15px; font-weight: 700; margin-bottom: 12px; color: #b91c1c;">
+                <i class="fas fa-exclamation-circle"></i> Cross-Document & Master Record Discrepancy Matrix
+              </h3>
+              <table class="portal-table">
+                <thead>
+                  <tr>
+                    <th>Reason Code</th>
+                    <th>Entity / Field</th>
+                    <th>Compared Document Values</th>
+                    <th>Record ID & Timestamp</th>
+                    <th>Regulatory Impact</th>
+                  </tr>
+                </thead>
+                <tbody id="cross-doc-tbody">
+                  <!-- Populated by js/chitragupta.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- TAB 3: ANOMALY & FORGERY INDICATORS -->
+          <div class="tab-content-panel" id="tab-anomaly">
+            <div class="anomaly-viewer-layout">
+              <!-- Left: Document Viewer with Bounding Boxes & Layer Toggles -->
+              <div class="document-inspection-pane">
+                <div class="viewer-toolbar">
+                  <span style="font-size: 12px; font-weight: 700;"><i class="fas fa-file-pdf text-red-500"></i> Affidavit_2_EoA.pdf (Page 2 of 2)</span>
+                  <div class="layer-toggle-btn-group">
+                    <button class="layer-toggle-btn active" data-mode="normal" onclick="window.ChitraguptaController.setDocViewerMode('normal')">Original</button>
+                    <button class="layer-toggle-btn" data-mode="ela" onclick="window.ChitraguptaController.setDocViewerMode('ela')">ELA Heatmap</button>
+                    <button class="layer-toggle-btn" data-mode="copymove" onclick="window.ChitraguptaController.setDocViewerMode('copymove')">Copy-Move Overlay</button>
+                  </div>
+                </div>
+
+                <div class="svg-doc-container" id="svg-document-viewer">
+                  <!-- Populated by js/chitragupta.js -->
+                </div>
+              </div>
+
+              <!-- Right: Sorted Forensic Flags List -->
+              <div class="flags-list-pane" id="anomaly-flags-list">
+                <!-- Populated by js/chitragupta.js -->
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 4: VERIFICATION BOARD -->
+          <div class="tab-content-panel" id="tab-verification">
+            <div class="verification-table-wrap">
+              <table class="portal-table">
+                <thead>
+                  <tr>
+                    <th>Statutory Document</th>
+                    <th>Issuing Authority</th>
+                    <th>Channel & Order</th>
+                    <th>Verification State (6 States)</th>
+                    <th>Compared Fields (Submitted vs Returned)</th>
+                    <th>Connector Timestamp</th>
+                    <th>Officer Action</th>
+                  </tr>
+                </thead>
+                <tbody id="verification-board-tbody">
+                  <!-- Populated by js/chitragupta.js -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- State Machine Mini-Diagram -->
+            <div class="state-machine-box">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <h4 style="font-size: 13px; font-weight: 700; color: #1e3a8a;"><i class="fas fa-sitemap"></i> Six Verification States & Trust Hierarchy Channels</h4>
+                <span style="font-size: 11px; color: var(--cg-text-muted);">SLA Polling Timeout: <strong id="sla-countdown-timer" style="color: #2563eb;">03:42</strong></span>
+              </div>
+              <p style="font-size: 11.5px; color: var(--cg-text-muted); line-height: 1.4;">
+                Documents pass through 5 channels in strict trust order: (1) Direct REST API Sandbox &rarr; (2) Cryptographic Digital Signature &rarr; (3) QR Code Portal Hash &rarr; (4) Reference Number Lookup &rarr; (5) Manual Correspondence. Any SOURCE_UNAVAILABLE condition automatically routes to MANUAL_REVIEW_REQUIRED with a generated draft letter.
+              </p>
+            </div>
+          </div>
+
+          <!-- TAB 5: COMPLIANCE ASSISTANT -->
+          <div class="tab-content-panel" id="tab-compliance">
+            <div class="compliance-cards-grid">
+              <!-- Faculty Card -->
+              <div class="compliance-card">
+                <div class="compliance-card-header">
+                  <strong><i class="fas fa-user-graduate" style="color: #2563eb;"></i> Faculty Cadre & Student Ratio</strong>
+                  <span class="compliance-clause-tag">APH App. 7, p. 112</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 12px;">
+                  <div>Required (1:20 UG for 720 students): <strong id="comp-faculty-req">36</strong></div>
+                  <div>Declared: <strong id="comp-faculty-decl">29</strong></div>
+                  <div style="color: #b91c1c; font-weight: 700;">Shortfall: <span id="comp-faculty-diff">-7</span></div>
+                </div>
+                <div style="font-size: 11px; color: #64748b; background: #f8fafc; padding: 6px 10px; border-radius: 4px; border: 1px solid #e2e8f0;">
+                  <strong>Cadre Check (1:2:6):</strong> Declared 1 Prof : 4 Assoc : 24 Asst. Deficit of 3 full Professors.
+                </div>
+                <div class="formula-collapse-box">
+                  <strong>Formula:</strong> <code>Faculty_Req = Ceil(Approved_Intake * 4 / 20) = Ceil(720 / 20) = 36</code>
+                </div>
+              </div>
+
+              <!-- Computers Card -->
+              <div class="compliance-card">
+                <div class="compliance-card-header">
+                  <strong><i class="fas fa-desktop" style="color: #059669;"></i> Instructional Computers Norm</strong>
+                  <span class="compliance-clause-tag">APH App. 5, p. 124</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 12px;">
+                  <div>Required (1:10 UG for 720 students): <strong id="comp-pc-req">72</strong></div>
+                  <div>Declared: <strong id="comp-pc-decl">60</strong></div>
+                  <div style="color: #b91c1c; font-weight: 700;">Shortfall: <span id="comp-pc-diff">-12</span></div>
+                </div>
+                <div style="font-size: 11px; color: #64748b; background: #f8fafc; padding: 6px 10px; border-radius: 4px; border: 1px solid #e2e8f0;">
+                  Minimum 20 workstations floor met. 12 workstations purchase/installation pending.
+                </div>
+                <div class="formula-collapse-box">
+                  <strong>Formula:</strong> <code>Computers_Req = Ceil(Approved_Intake / 10) = 72; Min_Threshold = 20</code>
+                </div>
+              </div>
+
+              <!-- Bandwidth Card -->
+              <div class="compliance-card">
+                <div class="compliance-card-header">
+                  <strong><i class="fas fa-wifi" style="color: #d97706;"></i> Dedicated Internet Bandwidth</strong>
+                  <span class="compliance-clause-tag">APH App. 5, p. 126</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 12px;">
+                  <div>Required (Intake 301-600): <strong id="comp-bw-req">300 Mbps</strong></div>
+                  <div>Declared: <strong id="comp-bw-decl">100 Mbps</strong></div>
+                  <div style="color: #b91c1c; font-weight: 700;">Shortfall: <span id="comp-bw-diff">-200 Mbps</span></div>
+                </div>
+                <div style="font-size: 11px; color: #64748b; background: #f8fafc; padding: 6px 10px; border-radius: 4px; border: 1px solid #e2e8f0;">
+                  Tariff code: <code>BW-SHORTFALL</code>. Dedicated 1:1 unshared leased line agreement required.
+                </div>
+              </div>
+
+              <!-- Built-up Area Card -->
+              <div class="compliance-card">
+                <div class="compliance-card-header">
+                  <strong><i class="fas fa-building" style="color: #7c3aed;"></i> Total Built-Up Area Norm</strong>
+                  <span class="compliance-clause-tag">APH App. 4, p. 138</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 12px;">
+                  <div>Required: <strong id="comp-bua-req">9,800 m²</strong></div>
+                  <div>Extracted from Plan: <strong id="comp-bua-decl">8,650 m²</strong></div>
+                  <div style="color: #b91c1c; font-weight: 700;">Gap: <span id="comp-bua-diff">-1,150 m²</span></div>
+                </div>
+                <!-- BUA Chart Container -->
+                <div style="height: 140px; width: 100%;">
+                  <canvas id="chart-bua-breakdown"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <!-- Computer Vision Infrastructure Photo Audit -->
+            <div class="subpage-card">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <h4 style="font-size: 14px; font-weight: 700; color: #1e3a8a;">
+                  <i class="fas fa-camera"></i> Computer Vision Infrastructure Review (Ultralytics YOLOv8 Geo-Audit)
+                </h4>
+                <span class="chat-citation-chip">APH App. 4, Clause 4.6 (Divyangjan Barrier-Free Access)</span>
+              </div>
+              <div style="display: grid; grid-template-columns: 280px 1fr; gap: 20px; align-items: center;">
+                <div style="position: relative; border-radius: 8px; overflow: hidden; border: 1px solid #cbd5e1; height: 180px; background: #0f172a; display: flex; align-items: center; justify-content: center;">
+                  <!-- Synthetic Classroom Preview -->
+                  <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #1e293b, #334155); display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff;">
+                    <i class="fas fa-chalkboard-teacher" style="font-size: 42px; color: #94a3b8; margin-bottom: 8px;"></i>
+                    <span style="font-size: 11px; font-weight: 600;">Room C-104 (Instructional Area)</span>
+                  </div>
+                  <!-- Simulated YOLO Bounding Box -->
+                  <div style="position: absolute; top: 30%; left: 20%; width: 50%; height: 45%; border: 2px solid #10b981; background: rgba(16, 185, 129, 0.15);">
+                    <span style="position: absolute; top: -16px; left: 0; background: #10b981; color: #fff; font-size: 9px; font-weight: 700; padding: 1px 4px;">Bench Grid (38 Desks, 94.2%)</span>
+                  </div>
+                </div>
+                <div style="font-size: 12px; color: var(--cg-text-main); line-height: 1.5;">
+                  <ul style="list-style-type: none; display: flex; flex-direction: column; gap: 6px;">
+                    <li><i class="fas fa-check-circle" style="color: #10b981;"></i> <strong>Geotag Audit:</strong> Coordinates (13.1284° N, 77.5833° E) match registered cadastral boundary within 12 meters.</li>
+                    <li><i class="fas fa-check-circle" style="color: #10b981;"></i> <strong>Duplicate Stock Photo Check:</strong> 0% perceptual hash match against nationwide AICTE photo repository.</li>
+                    <li><i class="fas fa-exclamation-triangle" style="color: #f59e0b;"></i> <strong>Capacity Analysis:</strong> 38 student workstations detected vs 60 declared intake capacity.</li>
+                    <li><i class="fas fa-times-circle" style="color: #ef4444;"></i> <strong>Barrier-Free Access:</strong> Wheelchair ramp or tactile ground paving NOT visible at classroom entrance threshold.</li>
+                    <li style="margin-top: 6px; padding: 6px 10px; background: #eff6ff; border-radius: 4px; border: 1px solid #bfdbfe;">
+                      <strong>Advisory Recommendation:</strong> Request additional video walkthrough evidence of Block C ground floor entrance.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 6: EVIDENCE GRAPH -->
+          <div class="tab-content-panel" id="tab-evidence">
+            <div class="evidence-graph-wrap" id="evidence-graph-container">
+              <!-- Rendered by js/chitragupta.js -->
+            </div>
+          </div>
+
+          <!-- TAB 7: OFFICER ACTIONS (HUMAN GATE) -->
+          <div class="tab-content-panel" id="tab-actions">
+            <div class="officer-actions-wrapper">
+              <!-- Stepper -->
+              <div class="workflow-stepper">
+                <div class="workflow-step">
+                  <div class="workflow-node-circle"><i class="fas fa-check"></i></div>
+                  <span style="font-size: 10.5px; font-weight: 600;">Draft</span>
+                </div>
+                <div class="workflow-step">
+                  <div class="workflow-node-circle"><i class="fas fa-check"></i></div>
+                  <span style="font-size: 10.5px; font-weight: 600;">Submitted</span>
+                </div>
+                <div class="workflow-step">
+                  <div class="workflow-node-circle"><i class="fas fa-check"></i></div>
+                  <span style="font-size: 10.5px; font-weight: 600;">AI Pre-Validation</span>
+                </div>
+                <div class="workflow-step active">
+                  <div class="workflow-node-circle"><i class="fas fa-user-edit"></i></div>
+                  <span style="font-size: 10.5px; font-weight: 700; color: var(--cg-saffron);">Officer Review</span>
+                </div>
+                <div class="workflow-step locked">
+                  <div class="workflow-node-circle"><i class="fas fa-lock"></i></div>
+                  <span style="font-size: 10.5px; font-weight: 600; color: #94a3b8;">Competent Decision</span>
+                </div>
+              </div>
+
+              <!-- Officer Decision Form -->
+              <div id="officer-action-form">
+                <!-- Rendered by js/chitragupta.js -->
+              </div>
+
+              <!-- Adverse Lock Card -->
+              <div class="locked-adverse-card">
+                <i class="fas fa-lock" style="font-size: 24px;"></i>
+                <div>
+                  <strong>Mandatory Human Gate: Adverse Regulatory Action Locked</strong>
+                  <p style="font-size: 11.5px; margin-top: 2px;">
+                    Reachable ONLY from the competent-authority state with a digitally signed human decision. AICTE-Verify operates strictly as an advisory system and cannot reject applications autonomously.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 2: DASHBOARD ================= -->
+      <section class="cg-view-section" id="cg-section-dashboard">
+        <div class="cg-page-header">
+          <div class="cg-page-title-wrap">
+            <h1><i class="fas fa-tachometer-alt" style="color: var(--cg-saffron);"></i> Executive Scrutiny Dashboard</h1>
+            <p class="cg-page-subtitle">Real-time scrutiny queue, performance KPIs, and multi-channel regulatory alerts</p>
+          </div>
+          <div class="cg-header-actions">
+            <button class="btn-cg-secondary" id="btn-simulate-alert">
+              <i class="fas fa-bell"></i> Simulate New Alert
+            </button>
+          </div>
+        </div>
+
+        <!-- 5 KPI Cards -->
+        <div class="dashboard-kpi-row">
+          <div class="kpi-card">
+            <div class="kpi-icon-wrap"><i class="fas fa-stopwatch"></i></div>
+            <div class="kpi-number">2m 14s</div>
+            <div class="kpi-title">Avg Verification Time</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon-wrap" style="color: #10b981; background: #ecfdf5;"><i class="fas fa-bolt"></i></div>
+            <div class="kpi-number">98.2%</div>
+            <div class="kpi-title">Alert Timeliness (&lt;60s)</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon-wrap" style="color: #8b5cf6; background: #f5f3ff;"><i class="fas fa-hourglass-half"></i></div>
+            <div class="kpi-number">78%</div>
+            <div class="kpi-title">Manual Effort Saved</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon-wrap" style="color: #f59e0b; background: #fffbeb;"><i class="fas fa-bullseye"></i></div>
+            <div class="kpi-number">94.6%</div>
+            <div class="kpi-title">Flag Precision</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon-wrap" style="color: #06b6d4; background: #ecfeff;"><i class="fas fa-network-wired"></i></div>
+            <div class="kpi-number">92.8%</div>
+            <div class="kpi-title">Sandbox Match Rate</div>
+          </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="dashboard-charts-grid">
+          <div class="chart-card">
+            <div class="chart-card-title">Findings Distribution by Reason Code</div>
+            <div style="height: 240px; position: relative;">
+              <canvas id="chart-findings-reason"></canvas>
+            </div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-card-title">Six Verification States Distribution</div>
+            <div style="height: 240px; position: relative;">
+              <canvas id="chart-states-dist"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Application Queue Table (12 Synthetic Applications) -->
+        <div class="subpage-card">
+          <div class="subpage-header">
+            <div class="subpage-title" style="font-size: 16px;">
+              <i class="fas fa-list-ol" style="color: var(--cg-saffron);"></i>
+              Institutional Application Queue (AY 2026-27 Active Cycle)
+            </div>
+            <span class="portal-session-pill">12 Applications Loaded</span>
+          </div>
+
+          <table class="portal-table">
+            <thead>
+              <tr>
+                <th>App ID</th>
+                <th>Institution Name & State</th>
+                <th>Category</th>
+                <th>Status Chip</th>
+                <th>Findings</th>
+                <th>Validation Time</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="dashboard-queue-tbody">
+              <!-- Rendered by js/chitragupta.js -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 3: VERIFICATION BOARD (STANDALONE) ================= -->
+      <section class="cg-view-section" id="cg-section-verification">
+        <div class="cg-page-header">
+          <div class="cg-page-title-wrap">
+            <h1><i class="fas fa-check-double" style="color: var(--cg-saffron);"></i> Issuing Authority Verification Board</h1>
+            <p class="cg-page-subtitle">Multi-channel cross-verification against official state registries & DigiLocker sandboxes</p>
+          </div>
+        </div>
+        <div class="subpage-card" style="margin-bottom: 20px;">
+          <div class="verification-table-wrap">
+            <table class="portal-table">
+              <thead>
+                <tr>
+                  <th>Statutory Document</th>
+                  <th>Issuing Authority</th>
+                  <th>Channel & Order</th>
+                  <th>Verification State (6 States)</th>
+                  <th>Compared Fields (Submitted vs Returned)</th>
+                  <th>Connector Timestamp</th>
+                  <th>Officer Action</th>
+                </tr>
+              </thead>
+              <tbody id="standalone-verification-tbody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- State Machine Mini-Diagram -->
+          <div class="state-machine-box">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <h4 style="font-size: 13px; font-weight: 700; color: #1e3a8a;"><i class="fas fa-sitemap"></i> Six Verification States & Trust Hierarchy Channels</h4>
+              <span style="font-size: 11px; color: var(--cg-text-muted);">SLA Polling Timeout: <strong style="color: #2563eb;">03:42</strong></span>
+            </div>
+            <p style="font-size: 11.5px; color: var(--cg-text-muted); line-height: 1.4;">
+              Documents pass through 5 channels in strict trust order: (1) Direct REST API Sandbox &rarr; (2) Cryptographic Digital Signature &rarr; (3) QR Code Portal Hash &rarr; (4) Reference Number Lookup &rarr; (5) Manual Correspondence. Any SOURCE_UNAVAILABLE condition automatically routes to MANUAL_REVIEW_REQUIRED with a generated draft letter.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 4: COMPLIANCE ASSISTANT (STANDALONE) ================= -->
+      <section class="cg-view-section" id="cg-section-compliance">
+        <div class="cg-page-header">
+          <div class="cg-page-title-wrap">
+            <h1><i class="fas fa-calculator" style="color: var(--cg-saffron);"></i> Regulatory Compliance Arithmetic</h1>
+            <p class="cg-page-subtitle">Deterministic formula calculation of land, faculty, computer, and infrastructure norms</p>
+          </div>
+        </div>
+        <div class="compliance-cards-grid">
+          <!-- Faculty Card -->
+          <div class="compliance-card">
+            <div class="compliance-card-header">
+              <strong><i class="fas fa-user-graduate" style="color: #2563eb;"></i> Faculty Cadre & Student Ratio</strong>
+              <span class="compliance-clause-tag">APH App. 7, p. 112</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 12px;">
+              <div>Required (1:20 UG for 720 students): <strong>36</strong></div>
+              <div>Declared: <strong>29</strong></div>
+              <div style="color: #b91c1c; font-weight: 700;">Shortfall: <span>-7</span></div>
+            </div>
+            <div style="font-size: 11px; color: #64748b; background: #f8fafc; padding: 6px 10px; border-radius: 4px; border: 1px solid #e2e8f0;">
+              <strong>Cadre Check (1:2:6):</strong> Declared 1 Prof : 4 Assoc : 24 Asst. Deficit of 3 full Professors.
+            </div>
+            <div class="formula-collapse-box">
+              <strong>Formula:</strong> <code>Faculty_Req = Ceil(Approved_Intake * 4 / 20) = Ceil(720 / 20) = 36</code>
+            </div>
+          </div>
+
+          <!-- Computers Card -->
+          <div class="compliance-card">
+            <div class="compliance-card-header">
+              <strong><i class="fas fa-desktop" style="color: #059669;"></i> Instructional Computers Norm</strong>
+              <span class="compliance-clause-tag">APH App. 5, p. 124</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 12px;">
+              <div>Required (1:10 UG for 720 students): <strong>72</strong></div>
+              <div>Declared: <strong>60</strong></div>
+              <div style="color: #b91c1c; font-weight: 700;">Shortfall: <span>-12</span></div>
+            </div>
+            <div style="font-size: 11px; color: #64748b; background: #f8fafc; padding: 6px 10px; border-radius: 4px; border: 1px solid #e2e8f0;">
+              Minimum 20 workstations floor met. 12 workstations purchase/installation pending.
+            </div>
+            <div class="formula-collapse-box">
+              <strong>Formula:</strong> <code>Computers_Req = Ceil(Approved_Intake / 10) = 72; Min_Threshold = 20</code>
+            </div>
+          </div>
+
+          <!-- Bandwidth Card -->
+          <div class="compliance-card">
+            <div class="compliance-card-header">
+              <strong><i class="fas fa-wifi" style="color: #d97706;"></i> Dedicated Internet Bandwidth</strong>
+              <span class="compliance-clause-tag">APH App. 5, p. 126</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 12px;">
+              <div>Required (Intake 301-600): <strong>300 Mbps</strong></div>
+              <div>Declared: <strong>100 Mbps</strong></div>
+              <div style="color: #b91c1c; font-weight: 700;">Shortfall: <span>-200 Mbps</span></div>
+            </div>
+            <div style="font-size: 11px; color: #64748b; background: #f8fafc; padding: 6px 10px; border-radius: 4px; border: 1px solid #e2e8f0;">
+              Tariff code: <code>BW-SHORTFALL</code>. Dedicated 1:1 unshared leased line agreement required.
+            </div>
+          </div>
+
+          <!-- Built-up Area Card -->
+          <div class="compliance-card">
+            <div class="compliance-card-header">
+              <strong><i class="fas fa-building" style="color: #7c3aed;"></i> Total Built-Up Area Norm</strong>
+              <span class="compliance-clause-tag">APH App. 4, p. 138</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 12px;">
+              <div>Required: <strong>9,800 m²</strong></div>
+              <div>Extracted from Plan: <strong>8,650 m²</strong></div>
+              <div style="color: #b91c1c; font-weight: 700;">Gap: <span>-1,150 m²</span></div>
+            </div>
+            <div style="font-size: 11px; color: #64748b; background: #f8fafc; padding: 6px 10px; border-radius: 4px; border: 1px solid #e2e8f0;">
+              Instructional Area: 4,350 m² vs 4,800 m² required (-450 m²). Physical verification recommended.
+            </div>
+          </div>
+        </div>
+
+        <!-- Computer Vision Infrastructure Photo Audit -->
+        <div class="subpage-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <h4 style="font-size: 14px; font-weight: 700; color: #1e3a8a;">
+              <i class="fas fa-camera"></i> Computer Vision Infrastructure Review (Ultralytics YOLOv8 Geo-Audit)
+            </h4>
+            <span class="chat-citation-chip">APH App. 4, Clause 4.6 (Divyangjan Barrier-Free Access)</span>
+          </div>
+          <div style="display: grid; grid-template-columns: 280px 1fr; gap: 20px; align-items: center;">
+            <div style="position: relative; border-radius: 8px; overflow: hidden; border: 1px solid #cbd5e1; height: 180px; background: #0f172a; display: flex; align-items: center; justify-content: center;">
+              <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #1e293b, #334155); display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff;">
+                <i class="fas fa-chalkboard-teacher" style="font-size: 42px; color: #94a3b8; margin-bottom: 8px;"></i>
+                <span style="font-size: 11px; font-weight: 600;">Room C-104 (Instructional Area)</span>
+              </div>
+              <div style="position: absolute; top: 30%; left: 20%; width: 50%; height: 45%; border: 2px solid #10b981; background: rgba(16, 185, 129, 0.15);">
+                <span style="position: absolute; top: -16px; left: 0; background: #10b981; color: #fff; font-size: 9px; font-weight: 700; padding: 1px 4px;">Bench Grid (38 Desks, 94.2%)</span>
+              </div>
+            </div>
+            <div style="font-size: 12px; color: var(--cg-text-main); line-height: 1.5;">
+              <ul style="list-style-type: none; display: flex; flex-direction: column; gap: 6px;">
+                <li><i class="fas fa-check-circle" style="color: #10b981;"></i> <strong>Geotag Audit:</strong> Coordinates (13.1284° N, 77.5833° E) match registered cadastral boundary within 12 meters.</li>
+                <li><i class="fas fa-check-circle" style="color: #10b981;"></i> <strong>Duplicate Stock Photo Check:</strong> 0% perceptual hash match against nationwide AICTE photo repository.</li>
+                <li><i class="fas fa-exclamation-triangle" style="color: #f59e0b;"></i> <strong>Capacity Analysis:</strong> 38 student workstations detected vs 60 declared intake capacity.</li>
+                <li><i class="fas fa-times-circle" style="color: #ef4444;"></i> <strong>Barrier-Free Access:</strong> Wheelchair ramp or tactile ground paving NOT visible at classroom entrance threshold.</li>
+                <li style="margin-top: 6px; padding: 6px 10px; background: #eff6ff; border-radius: 4px; border: 1px solid #bfdbfe;">
+                  <strong>Advisory Recommendation:</strong> Request additional video walkthrough evidence of Block C ground floor entrance.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 5: AUDIT TRAIL ================= -->
+      <section class="cg-view-section" id="cg-section-audit">
+        <div class="cg-page-header">
+          <div class="cg-page-title-wrap">
+            <h1><i class="fas fa-link" style="color: var(--cg-saffron);"></i> Immutable Cryptographic Audit Ledger</h1>
+            <p class="cg-page-subtitle">Genuine SHA-256 forward-linked hash chain using browser Web Cryptography API</p>
+          </div>
+          <div class="cg-header-actions">
+            <button class="btn-cg-primary" onclick="window.ChitraguptaController.verifyAuditChainUI()">
+              <i class="fas fa-check-double"></i> Verify Chain Integrity
+            </button>
+            <button class="btn-cg-secondary" onclick="window.ChitraguptaController.tamperAuditChainDemo()">
+              <i class="fas fa-user-ninja"></i> Tamper With a Row (Demo)
+            </button>
+            <button class="btn-cg-secondary" onclick="window.ChitraguptaController.restoreAuditChainDemo()">
+              <i class="fas fa-undo"></i> Restore & Re-hash Chain
+            </button>
+            <button class="btn-cg-secondary" onclick="window.AuditService.exportCSV()">
+              <i class="fas fa-file-csv"></i> Export CSV
+            </button>
+          </div>
+        </div>
+
+        <!-- Verification Banner -->
+        <div class="audit-status-banner intact" id="audit-verification-banner">
+          <i class="fas fa-check-double"></i>
+          <span><strong>CHAIN INTACT:</strong> Cryptographic forward-links verified. All blocks match SHA-256 hashes.</span>
+        </div>
+
+        <div class="subpage-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <span style="font-size: 13px; font-weight: 700; color: #1e3a8a;">Audit Blocks Register</span>
+            <span class="portal-session-pill" id="audit-blocks-count">9 verified blocks</span>
+          </div>
+
+          <table class="portal-table">
+            <thead>
+              <tr>
+                <th>Seq</th>
+                <th>Timestamp (UTC)</th>
+                <th>Actor</th>
+                <th>Role</th>
+                <th>Action Verb</th>
+                <th>Object Ref</th>
+                <th>Audit Details</th>
+                <th>Prev Hash (SHA-256)</th>
+                <th>Row Hash (SHA-256)</th>
+              </tr>
+            </thead>
+            <tbody id="audit-trail-tbody">
+              <!-- Rendered by js/chitragupta.js -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 6: SYSTEM DESIGN ================= -->
+      <section class="cg-view-section" id="cg-section-design">
+        <div class="cg-page-header">
+          <div class="cg-page-title-wrap">
+            <h1><i class="fas fa-project-diagram" style="color: var(--cg-saffron);"></i> System Architecture & Technical Specifications</h1>
+            <p class="cg-page-subtitle">Presentation-quality interactive diagrams for SIH 2026 Problem Statement 26261</p>
+          </div>
+        </div>
+
+        <div class="system-design-container">
+          <!-- Sticky Table of Contents -->
+          <nav class="design-toc-nav">
+            <strong style="font-size: 12px; color: var(--cg-text-main); display: block; margin-bottom: 8px;">Diagrams Index</strong>
+            <ul class="design-toc-list">
+              <li><a href="#sec-layered-arch">1. Layered Architecture</a></li>
+              <li><a href="#sec-module-map">2. Module Map M1-M7</a></li>
+              <li><a href="#sec-data-flow">3. Animated Data Flow</a></li>
+              <li><a href="#sec-state-machine">4. Verification State Machine</a></li>
+              <li><a href="#sec-langgraph-rag">5. LangGraph Agentic RAG</a></li>
+              <li><a href="#sec-workflow-gate">6. Human Workflow Gate</a></li>
+              <li><a href="#sec-forensic-ensemble">7. Forensic Ensemble</a></li>
+              <li><a href="#sec-data-model">8. Data Model (ERD)</a></li>
+              <li><a href="#sec-rbac-matrix">9. RBAC Matrix</a></li>
+              <li><a href="#sec-security-layers">10. Security & Privacy</a></li>
+              <li><a href="#sec-deploy-topo">11. Deployment Topology</a></li>
+              <li><a href="#sec-tech-stack">12. Technology Stack</a></li>
+              <li><a href="#sec-eval-targets">13. Evaluation Targets</a></li>
+              <li><a href="#sec-traceability">14. Requirements Traceability</a></li>
+            </ul>
+          </nav>
+
+          <!-- Diagrams Content Pane -->
+          <div class="design-diagrams-pane">
+            <div class="diagram-card" id="sec-layered-arch">
+              <div class="diagram-header">
+                <h3 class="diagram-title">1. Layered System Architecture</h3>
+                <p class="diagram-caption">End-to-end multi-tier architecture from presentation down to external adapters.</p>
+              </div>
+              <div class="diagram-svg-wrap" id="diag-layered-arch"></div>
+            </div>
+
+            <div class="diagram-card" id="sec-module-map">
+              <div class="diagram-header">
+                <h3 class="diagram-title">2. Module Map M1 to M7 & Objectives O1 to O6</h3>
+                <p class="diagram-caption">Functional decomposition mapping inputs, outputs, and satisfied objectives.</p>
+              </div>
+              <div id="diag-module-map"></div>
+            </div>
+
+            <div class="diagram-card" id="sec-data-flow">
+              <div class="diagram-header">
+                <h3 class="diagram-title">3. End-to-End Validation Data Flow (Animated)</h3>
+                <p class="diagram-caption">Step-by-step passage of institutional application bundles through validation gates.</p>
+              </div>
+              <div class="diagram-svg-wrap" id="diag-data-flow"></div>
+            </div>
+
+            <div class="diagram-card" id="sec-state-machine">
+              <div class="diagram-header">
+                <h3 class="diagram-title">4. Verification State Machine & Trust Channels</h3>
+                <p class="diagram-caption">Six deterministic states with automatic manual-review fallback upon connector timeout.</p>
+              </div>
+              <div class="diagram-svg-wrap" id="diag-state-machine"></div>
+            </div>
+
+            <div class="diagram-card" id="sec-langgraph-rag">
+              <div class="diagram-header">
+                <h3 class="diagram-title">5. Agentic RAG Graph (LangGraph) & Citation Verifier</h3>
+                <p class="diagram-caption">Multi-agent loop with query rewriting, 2-pass citation verification, and template fallback.</p>
+              </div>
+              <div class="diagram-svg-wrap" id="diag-langgraph-rag"></div>
+            </div>
+
+            <div class="diagram-card" id="sec-workflow-gate">
+              <div class="diagram-header">
+                <h3 class="diagram-title">6. Application Workflow with Human Gate</h3>
+                <p class="diagram-caption">Locked adverse-action state reachable only with a signed officer decision.</p>
+              </div>
+              <div id="diag-workflow-gate"></div>
+            </div>
+
+            <div class="diagram-card" id="sec-forensic-ensemble">
+              <div class="diagram-header">
+                <h3 class="diagram-title">7. Forensic Ensemble & Calibrated Tampering Indicators</h3>
+                <p class="diagram-caption">Fusion of Error Level Analysis, copy-move detection, font inspection, and seal perceptual hash.</p>
+              </div>
+              <div id="diag-forensic-ensemble"></div>
+            </div>
+
+            <div class="diagram-card" id="sec-data-model">
+              <div class="diagram-header">
+                <h3 class="diagram-title">8. Relational Data Model (ERD)</h3>
+                <p class="diagram-caption">Entity relationships between applications, documents, extractions, findings, and audit blocks.</p>
+              </div>
+              <div id="diag-data-model-erd"></div>
+            </div>
+
+            <div class="diagram-card" id="sec-rbac-matrix">
+              <div class="diagram-header">
+                <h3 class="diagram-title">9. Role-Based Access Control (RBAC) Matrix</h3>
+                <p class="diagram-caption">Separation of concerns ensuring institutional users cannot view forensic indicators.</p>
+              </div>
+              <div id="diag-rbac-matrix"></div>
+            </div>
+
+            <div class="diagram-card" id="sec-security-layers">
+              <div class="diagram-header">
+                <h3 class="diagram-title">10. Security & Privacy Safeguards</h3>
+                <p class="diagram-caption">AES-256 encryption, PII field masking, local sovereign inference, and forward-linked audit logs.</p>
+              </div>
+              <div id="diag-security-layers"></div>
+            </div>
+
+            <div class="diagram-card" id="sec-deploy-topo">
+              <div class="diagram-header">
+                <h3 class="diagram-title">11. Deployment Topology & AICTE Portal Integration</h3>
+                <p class="diagram-caption">Nginx reverse proxy, Docker Compose cluster, and local GGUF SLM runtime topology.</p>
+              </div>
+              <div id="diag-deploy-topo"></div>
+            </div>
+
+            <div class="diagram-card" id="sec-tech-stack">
+              <div class="diagram-header">
+                <h3 class="diagram-title">12. Technology Stack (All Open-Source / Sovereign)</h3>
+                <p class="diagram-caption">Fully autonomous, on-premise components with zero proprietary cloud dependencies.</p>
+              </div>
+              <div id="diag-tech-stack"></div>
+            </div>
+
+            <div class="diagram-card" id="sec-eval-targets">
+              <div class="diagram-header">
+                <h3 class="diagram-title">13. Evaluation Targets & Benchmarks Table</h3>
+                <p class="diagram-caption">Target metrics versus observed performance across precision, recall, and processing time.</p>
+              </div>
+              <div id="diag-eval-targets"></div>
+            </div>
+
+            <div class="diagram-card" id="sec-traceability">
+              <div class="diagram-header">
+                <h3 class="diagram-title">14. Requirements Traceability Matrix (Click to Navigate)</h3>
+                <p class="diagram-caption">Direct proof that every PS 26261 objective is implemented in this demo.</p>
+              </div>
+              <div id="diag-traceability-matrix"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 7: ABOUT PAGE ================= -->
+      <section class="cg-view-section" id="cg-section-about">
+        <div class="cg-page-header">
+          <div class="cg-page-title-wrap">
+            <h1><i class="fas fa-info-circle" style="color: var(--cg-saffron);"></i> About Chitragupta (AICTE-Verify)</h1>
+            <p class="cg-page-subtitle">Smart India Hackathon 2026 • Problem Statement 26261 • Regulation Bureau</p>
+          </div>
+        </div>
+
+        <div class="subpage-card" style="margin-bottom: 20px;">
+          <h3 style="font-size: 16px; font-weight: 700; color: #1e3a8a; margin-bottom: 8px;">The Problem</h3>
+          <p style="font-size: 12.5px; color: var(--cg-text-main); line-height: 1.6; text-align: justify;">
+            Every year, the All India Council for Technical Education (AICTE) scrutinizes tens of thousands of Extension of Approval (EoA) and new institutional approval applications. Scrutiny officers manually examine multi-gigabyte document bundles comprising land deeds, architectural plans, fire NOCs, audited accounts, and faculty rosters. This manual bottleneck creates inspection backlogs, risks overlooking forged or expired certificates, and lacks unified cross-document reconciliation.
+          </p>
+
+          <h3 style="font-size: 16px; font-weight: 700; color: #1e3a8a; margin: 18px 0 8px 0;">Our Solution</h3>
+          <p style="font-size: 12.5px; color: var(--cg-text-main); line-height: 1.6; text-align: justify;">
+            <strong>Chitragupta (AICTE-Verify)</strong> is an intelligent, privacy-preserving, decision-support module seamlessly embedded within the AICTE Partner Portal. Combining localized OCR, deterministic regulatory rule packs, multi-channel sandbox connectors, forensic image tampering detectors, and an agentic RAG explainer with strict human gates, Chitragupta compresses 45 minutes of manual scrutiny into 2 minutes while maintaining 100% human accountability.
+          </p>
+
+          <h3 style="font-size: 16px; font-weight: 700; color: #1e3a8a; margin: 18px 0 8px 0;">Why "Chitragupta"?</h3>
+          <p style="font-size: 12.5px; color: var(--cg-text-main); line-height: 1.6; text-align: justify;">
+            In Indian tradition, <strong>Chitragupta</strong> is the meticulous divine record-keeper who maintains the <em>Agrasamdhani</em>—the complete, unerring ledger of all actions. Our platform embodies this spirit: an incorruptible, vigilant record-keeper that observes every certificate, verifies every clause, and commits every decision into an immutable cryptographic chain.
+          </p>
+
+          <!-- Essential Safeguards -->
+          <div style="background: #fffbeb; border: 1px solid #fef3c7; padding: 16px; border-radius: 8px; margin-top: 18px;">
+            <h4 style="font-size: 13.5px; font-weight: 700; color: #92400e; margin-bottom: 6px;">
+              <i class="fas fa-shield-alt"></i> Non-Negotiable Regulatory Safeguards
+            </h4>
+            <ul style="font-size: 12px; color: #78350f; line-height: 1.5; padding-left: 20px;">
+              <li><strong>Decision Support Only:</strong> AI outputs are strictly preliminary indicators. Final approval rests exclusively with authorized human committees.</li>
+              <li><strong>No Autonomous Adverse Decisions:</strong> Rejections or intake reductions require digitally signed human authorization.</li>
+              <li><strong>Sovereign On-Premise Execution:</strong> No institutional records or scanned documents leave Indian sovereign server boundaries.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Team & SIH Credentials -->
+        <div class="subpage-card">
+          <h3 style="font-size: 15px; font-weight: 700; color: #1e3a8a; margin-bottom: 14px;">Smart India Hackathon 2026 Team</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px;">
+            <div style="border: 1px solid var(--cg-border); padding: 14px; border-radius: 8px; text-align: center;">
+              <div style="width: 48px; height: 48px; border-radius: 50%; background: #e0f2fe; color: #0284c7; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px auto; font-size: 20px;">
+                <i class="fas fa-code"></i>
+              </div>
+              <strong style="font-size: 13px;">Team Lead & Architect</strong>
+              <div style="font-size: 11px; color: var(--cg-text-muted);">Full-Stack & ML Pipeline</div>
+            </div>
+            <div style="border: 1px solid var(--cg-border); padding: 14px; border-radius: 8px; text-align: center;">
+              <div style="width: 48px; height: 48px; border-radius: 50%; background: #fef3c7; color: #b45309; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px auto; font-size: 20px;">
+                <i class="fas fa-brain"></i>
+              </div>
+              <strong style="font-size: 13px;">AI & Computer Vision</strong>
+              <div style="font-size: 11px; color: var(--cg-text-muted);">YOLOv8 & Forensic ELA</div>
+            </div>
+            <div style="border: 1px solid var(--cg-border); padding: 14px; border-radius: 8px; text-align: center;">
+              <div style="width: 48px; height: 48px; border-radius: 50%; background: #dcfce7; color: #15803d; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px auto; font-size: 20px;">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <strong style="font-size: 13px;">Security & Blockchain</strong>
+              <div style="font-size: 11px; color: var(--cg-text-muted);">SHA-256 Audit Trail</div>
+            </div>
+            <div style="border: 1px solid var(--cg-border); padding: 14px; border-radius: 8px; text-align: center;">
+              <div style="width: 48px; height: 48px; border-radius: 50%; background: #f3e8ff; color: #7e22ce; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px auto; font-size: 20px;">
+                <i class="fas fa-paint-brush"></i>
+              </div>
+              <strong style="font-size: 13px;">Frontend & UI/UX</strong>
+              <div style="font-size: 11px; color: var(--cg-text-muted);">Portal Clone & Accessibility</div>
+            </div>
+          </div>
+          <div style="margin-top: 18px; font-size: 11px; color: var(--cg-text-muted); text-align: center;">
+            Problem Statement: <strong>PS 26261</strong> • Organization: <strong>AICTE, Ministry of Education, Govt. of India</strong> • Category: <strong>Software / Smart Automation</strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 8: ADMIN / SLM CONTROL ================= -->
+      <section class="cg-view-section" id="cg-section-admin">
+        <div class="cg-page-header">
+          <div class="cg-page-title-wrap">
+            <h1><i class="fas fa-cogs" style="color: #ef4444;"></i> System Administrator & SLM Control Console</h1>
+            <p class="cg-page-subtitle">Restricted console for inference engine runtime control and live regulatory rule packs</p>
+          </div>
+        </div>
+
+        <div class="slm-control-panel">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <div>
+              <h3 style="font-size: 16px; font-weight: 700;">Local Small Language Model (SLM) Runtime</h3>
+              <div style="font-size: 12px; color: var(--cg-text-muted); margin-top: 2px;">
+                Model: <strong>Fine-tuned 3B SLM (GGUF, Q4_K_M, on-premise llama.cpp)</strong>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span class="status-dot online" id="slm-status-light"></span>
+              <span style="font-size: 13px; font-weight: 700;" id="slm-status-text">SLM Online (Fine-tuned 3B GGUF, local)</span>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; font-size: 11.5px; margin-bottom: 4px;">
+              <span>Simulated VRAM Utilization: <strong>2.8 GB / 6.0 GB (46%)</strong></span>
+              <span style="color: #10b981;">Health: Optimal (Latency: 28 tok/s)</span>
+            </div>
+            <div class="vram-bar-wrap">
+              <div class="vram-bar-fill"></div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px;">
+            <button class="btn-cg-secondary" onclick="window.ChitraguptaController.toggleSlmState(true)">
+              <i class="fas fa-play" style="color: #10b981;"></i> Start Engine
+            </button>
+            <button class="btn-cg-secondary" onclick="window.ChitraguptaController.toggleSlmState(false)">
+              <i class="fas fa-stop" style="color: #ef4444;"></i> Stop (Enter Rules-Only Mode)
+            </button>
+            <button class="btn-cg-secondary" onclick="window.ChitraguptaController.toggleSlmState(true)">
+              <i class="fas fa-redo" style="color: #3b82f6;"></i> Restart Engine
+            </button>
+          </div>
+        </div>
+
+        <!-- Rule Pack Editor (Section 4.7) -->
+        <div class="subpage-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <div>
+              <h3 style="font-size: 15px; font-weight: 700; color: #1e3a8a;">
+                <i class="fas fa-file-code"></i> Live Regulatory Rule Pack Editor (YAML Schema)
+              </h3>
+              <p style="font-size: 11.5px; color: var(--cg-text-muted);">
+                Rule Pack: <code>RULEPACK-APH-2024-27-V3.2</code> • Effective From: <strong>2024-04-01</strong>
+              </p>
+            </div>
+            <button class="btn-cg-primary" onclick="window.ChitraguptaController.publishRulePack()">
+              <i class="fas fa-upload"></i> Publish Rule Pack v3.2.1
+            </button>
+          </div>
+          <textarea id="rulepack-editor-textarea" style="width: 100%; height: 240px; font-family: monospace; font-size: 12px; padding: 12px; border: 1px solid var(--cg-border); border-radius: 6px; background: #0f172a; color: #38bdf8;"># AICTE Rule Pack v3.2.0 (YAML Schema)
+version: "3.2.0"
+handbook: "APH 2024-27"
+effective_from: "2024-04-01"
+
+thresholds:
+  faculty_ug_ratio: 20.0
+  faculty_cadre_ratio: [1, 2, 6]
+  computer_ug_ratio: 10.0
+  computer_min_floor: 20
+  building_stability_age_threshold_years: 30
+  minimum_affidavit_stamp_duty_inr: 100.00
+  ter_fee_base_eoa_inr: 60000.00
+  ter_fee_per_increase_division_inr: 60000.00
+
+channels_trust_hierarchy:
+  - id: 1
+    type: "API_SANDBOX_DIRECT"
+    trust_weight: 1.00
+  - id: 2
+    type: "DIGITAL_SIGNATURE_PKI"
+    trust_weight: 0.95
+  - id: 3
+    type: "PORTAL_QR_HASH"
+    trust_weight: 0.85
+  - id: 4
+    type: "REFERENCE_SERIAL_LOOKUP"
+    trust_weight: 0.70
+  - id: 5
+    type: "MANUAL_OFFICER_CORRESPONDENCE"
+    trust_weight: 0.60
+</textarea>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ================= 12-STEP AI PIPELINE SIMULATION MODAL ================= -->
+  <div class="pipeline-modal-backdrop hidden" id="pipeline-modal">
+    <div class="pipeline-modal-box">
+      <div class="pipeline-header">
+        <div class="pipeline-title">
+          <i class="fas fa-microchip" style="color: var(--cg-saffron);"></i>
+          <span>Executing Chitragupta AI Review Pipeline (M1 to M7)</span>
+        </div>
+        <button class="btn-cg-secondary" id="btn-skip-pipeline" style="padding: 4px 10px; font-size: 11px;">
+          <i class="fas fa-forward"></i> Fast Forward
+        </button>
+      </div>
+
+      <div class="pipeline-progress-bar-wrap">
+        <div class="pipeline-progress-bar-fill" id="pipeline-progress-bar-fill"></div>
+      </div>
+
+      <div class="pipeline-body">
+        <div class="pipeline-steps-list" id="pipeline-steps-list">
+          <!-- Populated by js/chitragupta.js -->
+        </div>
+        <div class="pipeline-log-panel" id="pipeline-log-panel">
+          <!-- Monospace live logs streamed here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= DRAFT LETTER MODAL (SOURCE_UNAVAILABLE) ================= -->
+  <div class="pipeline-modal-backdrop hidden" id="draft-letter-modal">
+    <div class="pipeline-modal-box" style="width: 720px;">
+      <div class="pipeline-header">
+        <div class="pipeline-title">
+          <i class="fas fa-envelope-open-text" style="color: #fbbf24;"></i>
+          <span>Prefilled Directorate Confirmation Letter Draft</span>
+        </div>
+        <button class="chatbot-close-btn" onclick="window.ChitraguptaController.closeDraftLetterModal()">&times;</button>
+      </div>
+      <div style="padding: 20px 24px;">
+        <div style="font-size: 12px; margin-bottom: 8px;"><strong>To:</strong> <span id="draft-letter-to"></span></div>
+        <div style="font-size: 12px; margin-bottom: 12px;"><strong>Subject:</strong> <span id="draft-letter-subject"></span></div>
+        <textarea id="draft-letter-body" style="width: 100%; height: 260px; padding: 12px; font-family: sans-serif; font-size: 12px; border: 1px solid var(--cg-border); border-radius: 6px; line-height: 1.5;"></textarea>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px;">
+          <button class="btn-cg-primary" onclick="window.ChitraguptaController.copyDraftLetter()">
+            <i class="fas fa-copy"></i> Copy Official Letter Draft
+          </button>
+          <button class="btn-cg-secondary" onclick="window.ChitraguptaController.closeDraftLetterModal()">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= FLOATING CHATBOT BUTTON & POPUP (HANDBOOK Q&A) ================= -->
+  <button class="floating-chatbot-btn" id="portal-chatbot-btn" title="AICTE Regulatory Handbook Assistant">
+    <i class="fas fa-robot"></i>
+  </button>
+
+  <div class="chatbot-popup-panel hidden" id="chatbot-popup-panel">
+    <div class="chatbot-header">
+      <div class="chatbot-title-box">
+        <div class="chatbot-avatar">
+          <i class="fas fa-robot"></i>
+        </div>
+        <div>
+          <div class="chatbot-title">AICTE Handbook Assistant</div>
+          <div class="chatbot-subtitle">Indexed on APH 2024-27 Master Edition</div>
+        </div>
+      </div>
+      <button class="chatbot-close-btn" id="chatbot-close-btn">&times;</button>
+    </div>
+
+    <!-- Messages Container -->
+    <div class="chatbot-messages-container" id="chatbot-messages-container">
+      <div class="chat-bubble bot">
+        Namaste! I am the AICTE Regulatory Knowledge Assistant. Ask me any question regarding the Approval Process Handbook (2024-27). Every answer cites the exact chapter, clause and page number.
+        <div class="chat-citation-chip">
+          <i class="fas fa-book"></i> APH 2024-27 Master Index
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Questions Chips -->
+    <div class="chat-quick-questions">
+      <button class="quick-q-btn">3-Year EoA Eligibility?</button>
+      <button class="quick-q-btn">TER fee for expansion?</button>
+      <button class="quick-q-btn">Can we edit after submit?</button>
+      <button class="quick-q-btn">Faculty ratio norms?</button>
+      <button class="quick-q-btn">Computers ratio?</button>
+      <button class="quick-q-btn">Structural stability 30 yrs?</button>
+    </div>
+
+    <!-- Input Row -->
+    <div class="chatbot-input-row">
+      <input type="text" class="chatbot-input" id="chatbot-input" placeholder="Ask handbook question (e.g. fire safety expired)...">
+      <button class="chatbot-send-btn" id="chatbot-send-btn">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="portal-footer">
+    Demo prototype for SIH 2026 PS 26261. Not affiliated with or endorsed by AICTE. All data is synthetic.
+  </footer>
+
+  <!-- Core JavaScript Modules (Execution in Order) -->
+  <script src="js/data.js"></script>
+  <script src="js/audit.js"></script>
+  <script src="js/portal.js"></script>
+  <script src="js/chitragupta.js"></script>
+  <script src="js/design.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
